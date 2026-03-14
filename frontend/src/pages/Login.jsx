@@ -30,7 +30,12 @@ function Login() {
 
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data.user))
-      navigate('/menu')
+
+      if (data.user.role === 'admin') {
+        navigate('/admin')
+      } else {
+        navigate('/menu')
+      }
 
     } catch (err) {
       setError('Something went wrong. Is the backend running?')

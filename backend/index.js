@@ -16,6 +16,9 @@ app.use('/api/auth', authRoutes)
 const orderRoutes = require('./routes/order')
 app.use('/api/orders', orderRoutes)
 
+const adminRoutes = require('./routes/admin')
+app.use('/api/admin', adminRoutes)
+
 // Test route
 app.get('/', (req, res) => {
   res.send('Campus Cafe API is running!')
