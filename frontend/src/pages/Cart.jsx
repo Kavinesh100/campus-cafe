@@ -1,12 +1,46 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
+function Confetti() {
+  const pieces = Array.from({ length: 80 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 1.5,
+    color: ['#4f46e5', '#a5b4fc', '#f59e0b', '#10b981', '#ef4444', '#ec4899', '#ffffff'][Math.floor(Math.random() * 7)],
+    size: Math.random() * 8 + 6,
+  }))
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 999 }}>
+      <style>{`
+        @keyframes confettiFall {
+          0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+          100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+      `}</style>
+      {pieces.map(p => (
+        <div key={p.id} style={{
+          position: 'absolute',
+          left: `${p.left}%`,
+          top: '-20px',
+          width: `${p.size}px`,
+          height: `${p.size}px`,
+          backgroundColor: p.color,
+          borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+          animation: `confettiFall 2.5s ease-in ${p.delay}s forwards`,
+        }} />
+      ))}
+    </div>
+  )
+}
+
 function Cart() {
   const location = useLocation()
   const navigate = useNavigate()
   const [cart, setCart] = useState(location.state?.cart || [])
   const [orderPlaced, setOrderPlaced] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
 
   const user = JSON.parse(localStorage.getItem('user'))
   const token = localStorage.getItem('token')
@@ -48,6 +82,8 @@ function Cart() {
       })
 
       if (response.ok) {
+        setShowConfetti(true)
+        setTimeout(() => setShowConfetti(false), 4000)
         setOrderPlaced(true)
       } else {
         alert('Failed to place order. Try again.')
@@ -58,10 +94,10 @@ function Cart() {
     setLoading(false)
   }
 
-  // Order success screen
   if (orderPlaced) {
     return (
       <div style={styles.successPage}>
+        {showConfetti && <Confetti />}
         <div style={styles.successCard}>
           <div style={styles.checkmark}>✓</div>
           <h2 style={styles.successTitle}>Order Placed!</h2>
@@ -82,6 +118,8 @@ function Cart() {
 
   return (
     <div style={styles.page}>
+      {showConfetti && <Confetti />}
+
       {/* Navbar */}
       <div style={styles.navbar}>
         <button style={styles.backArrow} onClick={() => navigate('/menu')}>← Menu</button>
@@ -100,11 +138,15 @@ function Cart() {
           </div>
         ) : (
           <>
-            {/* Cart items */}
             <div style={styles.itemsList}>
               {cart.map(item => (
                 <div key={item.id} style={styles.cartItem}>
-                  <span style={styles.cartEmoji}>{item.emoji}</span>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={styles.cartImage}
+                    onError={(e) => { e.target.style.display = 'none' }}
+                  />
                   <div style={styles.itemInfo}>
                     <div style={styles.itemName}>{item.name}</div>
                     <div style={styles.itemPrice}>₹{item.price} each</div>
@@ -119,7 +161,6 @@ function Cart() {
               ))}
             </div>
 
-            {/* Bill summary */}
             <div style={styles.bill}>
               <h3 style={styles.billTitle}>Bill Summary</h3>
               {cart.map(item => (
@@ -135,7 +176,6 @@ function Cart() {
               </div>
             </div>
 
-            {/* Place order button */}
             <button
               style={loading ? styles.orderBtnDisabled : styles.orderBtn}
               onClick={handlePlaceOrder}
@@ -162,8 +202,8 @@ const styles = {
   emptyText: { color: '#888', fontSize: '16px', marginBottom: '20px' },
   browseBtn: { backgroundColor: '#4f46e5', color: 'white', border: 'none', borderRadius: '8px', padding: '12px 28px', cursor: 'pointer', fontSize: '15px', fontWeight: '600' },
   itemsList: { backgroundColor: 'white', borderRadius: '12px', overflow: 'hidden', marginBottom: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.07)' },
-  cartItem: { display: 'flex', alignItems: 'center', padding: '16px', borderBottom: '1px solid #f3f4f6', gap: '12px' },
-  cartEmoji: { fontSize: '28px' },
+  cartItem: { display: 'flex', alignItems: 'center', padding: '14px 16px', borderBottom: '1px solid #f3f4f6', gap: '12px' },
+  cartImage: { width: '52px', height: '52px', borderRadius: '10px', objectFit: 'cover' },
   itemInfo: { flex: 1 },
   itemName: { fontWeight: '600', fontSize: '15px', color: '#1a1a2e' },
   itemPrice: { fontSize: '12px', color: '#888', marginTop: '2px' },
