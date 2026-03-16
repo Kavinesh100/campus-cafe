@@ -46,6 +46,20 @@ function Login() {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
+
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+          <svg width="64" height="64" viewBox="0 0 100 100">
+            <rect width="100" height="100" rx="20" fill="#4f46e5"/>
+            <path d="M30 45 L38 80 L62 80 L70 45 Z" fill="white"/>
+            <rect x="26" y="40" width="48" height="8" rx="4" fill="white"/>
+            <ellipse cx="50" cy="81" rx="26" ry="5" fill="white" opacity="0.8"/>
+            <path d="M70 52 Q82 52 82 62 Q82 72 70 72" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            <path d="M38 35 Q40 28 38 21" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+            <path d="M50 32 Q52 24 50 16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+            <path d="M62 35 Q64 28 62 21" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+          </svg>
+        </div>
+
         <h1 style={styles.title}>Campus Cafe</h1>
         <p style={styles.subtitle}>Sign in to order your food</p>
 

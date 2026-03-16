@@ -14,6 +14,19 @@ const menuItems = [
   { id: 10, name: 'Fresh Lime Soda', price: 25, category: 'Drinks', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=300&q=80' },
 ]
 
+const CafeLogo = () => (
+  <svg width="36" height="36" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="20" fill="white" opacity="0.2"/>
+    <path d="M30 45 L38 80 L62 80 L70 45 Z" fill="white"/>
+    <rect x="26" y="40" width="48" height="8" rx="4" fill="white"/>
+    <ellipse cx="50" cy="81" rx="26" ry="5" fill="white" opacity="0.8"/>
+    <path d="M70 52 Q82 52 82 62 Q82 72 70 72" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round"/>
+    <path d="M38 35 Q40 28 38 21" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" opacity="0.8"/>
+    <path d="M50 32 Q52 24 50 16" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" opacity="0.8"/>
+    <path d="M62 35 Q64 28 62 21" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" opacity="0.8"/>
+  </svg>
+)
+
 function Menu() {
   const [cart, setCart] = useState([])
   const [activeCategory, setActiveCategory] = useState('All')
@@ -55,9 +68,13 @@ function Menu() {
   return (
     <div style={styles.page}>
       <div style={styles.navbar}>
-        <h1 style={styles.navTitle}>Campus Cafe</h1>
+        <div style={styles.navLeft}>
+          <CafeLogo />
+          <h1 style={styles.navTitle}>Campus Cafe</h1>
+        </div>
         <div style={styles.navRight}>
           <span style={styles.welcome}>Hi, {user?.name || 'Guest'}</span>
+          <button style={styles.ordersBtn} onClick={() => navigate('/orders')}>My Orders</button>
           <button style={styles.logoutBtn} onClick={handleLogout}>Logout</button>
         </div>
       </div>
@@ -119,9 +136,11 @@ function Menu() {
 const styles = {
   page: { minHeight: '100vh', backgroundColor: '#f0f4f8', paddingBottom: '80px' },
   navbar: { backgroundColor: '#4f46e5', padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-  navTitle: { color: 'white', fontSize: '22px', fontWeight: 'bold' },
-  navRight: { display: 'flex', alignItems: 'center', gap: '16px' },
+  navLeft: { display: 'flex', alignItems: 'center', gap: '10px' },
+  navTitle: { color: 'white', fontSize: '22px', fontWeight: 'bold', margin: 0 },
+  navRight: { display: 'flex', alignItems: 'center', gap: '12px' },
   welcome: { color: '#c7d2fe', fontSize: '14px' },
+  ordersBtn: { backgroundColor: 'transparent', color: 'white', border: '1px solid #818cf8', borderRadius: '6px', padding: '6px 14px', cursor: 'pointer', fontSize: '13px' },
   logoutBtn: { backgroundColor: 'transparent', color: 'white', border: '1px solid #818cf8', borderRadius: '6px', padding: '6px 14px', cursor: 'pointer', fontSize: '13px' },
   content: { padding: '24px' },
   categories: { display: 'flex', gap: '10px', marginBottom: '24px', flexWrap: 'wrap' },
