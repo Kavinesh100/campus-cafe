@@ -53,10 +53,10 @@ function Login() {
             <path d="M30 45 L38 80 L62 80 L70 45 Z" fill="white"/>
             <rect x="26" y="40" width="48" height="8" rx="4" fill="white"/>
             <ellipse cx="50" cy="81" rx="26" ry="5" fill="white" opacity="0.8"/>
-            <path d="M70 52 Q82 52 82 62 Q82 72 70 72" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
-            <path d="M38 35 Q40 28 38 21" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
-            <path d="M50 32 Q52 24 50 16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
-            <path d="M62 35 Q64 28 62 21" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+            <path d="M70 52 Q82 52 82 62 Q82 72 70 72" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round"/>
+            <path d="M38 35 Q40 28 38 21" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" opacity="0.8"/>
+            <path d="M50 32 Q52 24 50 16" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" opacity="0.8"/>
+            <path d="M62 35 Q64 28 62 21" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" opacity="0.8"/>
           </svg>
         </div>
 
@@ -86,6 +86,9 @@ function Login() {
           Don't have an account?{' '}
           <span style={styles.link} onClick={() => navigate('/signup')}>Sign up</span>
         </p>
+        <p style={styles.switchText}>
+          <span style={styles.link} onClick={() => navigate('/')}>← Back to home</span>
+        </p>
       </div>
     </div>
   )
@@ -102,7 +105,7 @@ const styles = {
   input: { width: '100%', padding: '12px 14px', borderRadius: '8px', border: '1.5px solid #ddd', fontSize: '15px', outline: 'none' },
   button: { width: '100%', padding: '13px', backgroundColor: '#4f46e5', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'pointer', marginTop: '8px' },
   buttonDisabled: { width: '100%', padding: '13px', backgroundColor: '#a5b4fc', color: 'white', border: 'none', borderRadius: '8px', fontSize: '16px', fontWeight: '600', cursor: 'not-allowed', marginTop: '8px' },
-  switchText: { textAlign: 'center', marginTop: '20px', color: '#666', fontSize: '14px' },
+  switchText: { textAlign: 'center', marginTop: '12px', color: '#666', fontSize: '14px' },
   link: { color: '#4f46e5', cursor: 'pointer', fontWeight: '500' },
 }
 
