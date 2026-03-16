@@ -6,6 +6,7 @@ import Menu from './pages/Menu'
 import Cart from './pages/Cart'
 import Orders from './pages/Orders'
 import Admin from './pages/Admin'
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   )

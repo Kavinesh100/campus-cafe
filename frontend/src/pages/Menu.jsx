@@ -204,7 +204,6 @@ function Menu() {
       {showConfetti && <Confetti />}
       <Toast message={toast.message} visible={toast.visible} />
 
-      {/* Glassmorphism Navbar */}
       <div style={{
         ...styles.navbar,
         background: darkMode
@@ -229,12 +228,12 @@ function Menu() {
           >
             {darkMode ? '☀️' : '🌙'}
           </button>
+          <button style={styles.ordersBtn} onClick={() => navigate('/profile')}>Profile</button>
           <button style={styles.ordersBtn} onClick={() => navigate('/orders')}>My Orders</button>
           <button style={styles.logoutBtn} onClick={handleLogout}>Logout</button>
         </div>
       </div>
 
-      {/* Video Banner */}
       <div style={styles.videoBanner}>
         <video autoPlay muted loop playsInline style={styles.bannerVideo}>
           <source src="/cafe.mp4" type="video/mp4" />
@@ -246,7 +245,6 @@ function Menu() {
       </div>
 
       <div style={styles.content}>
-        {/* Category filter */}
         <div style={styles.categories}>
           {categories.map(cat => (
             <button
@@ -264,7 +262,6 @@ function Menu() {
           ))}
         </div>
 
-        {/* Menu grid */}
         <div style={styles.grid}>
           {filtered.map((item, index) => {
             const cartItem = cart.find(c => c.id === item.id)
@@ -283,22 +280,15 @@ function Menu() {
         </div>
       </div>
 
-      {/* Floating cart button */}
       {totalItems > 0 && (
         <div
-          style={{
-            ...styles.floatingCart,
-            animation: 'slideUp 0.3s ease',
-          }}
+          style={{ ...styles.floatingCart, animation: 'slideUp 0.3s ease' }}
           onClick={() => navigate('/cart', { state: { cart } })}
         >
           <style>{`
             @keyframes slideUp {
-              from { transform: translateY(100px); opacity: 0; }
-              to { transform: translateY(0); opacity: 1; }
-            }
-            .floatingCartBtn:hover {
-              transform: scale(1.03);
+              from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+              to { transform: translateX(-50%) translateY(0); opacity: 1; }
             }
           `}</style>
           <div style={styles.floatingCartInner}>
